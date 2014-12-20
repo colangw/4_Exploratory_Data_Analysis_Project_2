@@ -21,7 +21,7 @@ summaryDF$year <- as.factor(summaryDF$year)
 summaryDF.baltimore <- summaryDF[summaryDF$fips == "24510", ]
 
 # Let's make a smaller DF with only the data we need and clean up names
-EmPerYr <- data.frame(summaryDF.baltimore$Emissions, summaryDF$type, summaryDF.baltimore$year)
+EmPerYr <- data.frame(summaryDF.baltimore$Emissions, summaryDF.baltimore$type, summaryDF.baltimore$year)
 
 
 # and let's sum up the Emissions per year
@@ -31,5 +31,5 @@ sumEmPerYr <- aggregate(Emissions, by = list(type, year), FUN = sum)
 names(sumEmPerYr) <- c("Type", "Year", "Emissions")
 
 p <- ggplot(data = sumEmPerYr, aes(x = Year, y = Emissions))
-p + geom_bar(stat="identity") + facet_grid(. ~ Type) + labs(title = "PM2.5 emissions for Baltimore")
+p + geom_bar(stat="identity") + facet_grid(. ~ Type) + labs(title = "PM2.5 emissions for Baltimore") + geom_smooth(method="lm",se=FALSE, aes(group=3), col = "red")
 

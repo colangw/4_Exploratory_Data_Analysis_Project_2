@@ -25,6 +25,8 @@ sumEmPerYr$Emissions <- mapply((function(x) x / 1000000),  sumEmPerYr$Emissions)
 
 # barchart
 Emissions <- c(sumEmPerYr$Emissions)
-bplt <- barplot(Emissions, ylim = c(0, 8), main="PM2.5 emissions from all sources", xlab="Year", ylab = "Emisisons (million tons)", names.arg=c("1999", "2002", "2005", "2008"))
+bplt <- barplot(Emissions, ylim = c(0, 8), main="PM2.5 emissions from all sources (US)", xlab="Year", ylab = "Emisisons (million tons)", names.arg=c("1999", "2002", "2005", "2008"))
 # for clarity's sake, let's add text to each bar showing the actual emissions amount
 text(bplt, Emissions - 1, labels = round(Emissions, 2))
+model <- lm(Emissions ~ year, sumEmPerYr)
+# abline(model, lwd = 2, col = "red")
